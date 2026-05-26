@@ -7,7 +7,7 @@
       "properties": {
         "id": { "type": "string", "description": "ID unik hewan / qurban (contoh: AQ-2026-0001)." },
         "namaPekurban": { "type": "string", "description": "Nama orang yang berqurban." },
-        "jenisHewan": { "type": "string", "enum": ["Sapi", "Kambing", "Domba", "Kerbau"], "description": "Jenis hewan qurban." },
+        "jenisHewan": { "type": "string", "enum": ["Sapi", "Domba", ], "description": "Jenis hewan qurban." },
         "tipeHewan": { "type": "string", "description": "Tipe detail hewan, misal Sapi Limousin Jumbo." },
         "beratHewan": { "type": "number", "description": "Berat badan hewan dalam Kilogram." },
         "status": { "type": "string", "enum": ["menunggu", "diterima", "antemortem_aman", "siap_sembelih", "sedang_sembelih", "sedang_kulit_potong", "sedang_kemas", "siap_distribusi", "selesai"], "description": "Status alur proses penyembelihan." },
