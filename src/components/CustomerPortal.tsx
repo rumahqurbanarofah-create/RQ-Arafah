@@ -552,10 +552,7 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ darkMode }) => {
                     <strong>1. Waktu Estimasi:</strong> Kami berusaha maksimal menyelesaikan penyembelihan tepat waktu. Keterlambatan dapat dipicu oleh penyesuaian stabilitas gerak hewan.
                   </p>
                   <p>
-                    <strong>2. Pengambilan Daging:</strong> Bila Anda berencana mengambil paket karkas secara mandiri, mohon bawa fotokopi KTP / screenshot Whatsapp ID Qurban Anda guna verifikasi tim logistik.
-                  </p>
-                  <p>
-                    <strong>3. Higienitas Terjamin:</strong> Seluruh area dipotongi di bawah bimbingan Ustadz internal dan dokter RQA terakreditasi MUI.
+                    <strong>2. Higienitas Terjamin:</strong> Seluruh area dipotongi di bawah bimbingan Ustadz internal dan dokter RQA terakreditasi MUI.
                   </p>
                 </div>
               </div>
