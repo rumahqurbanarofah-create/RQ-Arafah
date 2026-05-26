@@ -72,7 +72,7 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
   const [newTanggal, setNewTanggal] = useState('2026-05-27');
   const [newWaktu, setNewWaktu] = useState('08:00');
   const [newLokasi, setNewLokasi] = useState('Zona Utama RQA');
-  const [newVideo, setNewVideo] = useState('https://www.youtube.com/embed/dQw4w9WgXcQ');
+  const [newVideo, setNewVideo] = useState('');
   const [newCatatan, setNewCatatan] = useState('');
   const [newStatus, setNewStatus] = useState<StatusPenyembelihan>('menunggu');
 
@@ -152,7 +152,7 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
     setNewTanggal('2026-05-27');
     setNewWaktu('08:00');
     setNewLokasi('Zona Utama RQA');
-    setNewVideo('https://www.youtube.com/embed/dQw4w9WgXcQ');
+    setNewVideo('');
     setNewCatatan('');
     setNewStatus('menunggu');
     setIsCreateOpen(true);
@@ -713,10 +713,10 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
 
                 {/* Video Embed url */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Link Feed CCTV / Video Stream</label>
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Link Video Dokumentasi (Google Drive)</label>
                   <input
                     type="text"
-                    placeholder="Input URL Youtube atau stream..."
+                    placeholder="Contoh: https://drive.google.com/file/d/.../view"
                     value={newVideo}
                     onChange={(e) => setNewVideo(e.target.value)}
                     className={`w-full p-2.5 rounded-xl text-xs outline-none border focus:border-blue-500 font-mono text-[11px]
@@ -924,9 +924,10 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
 
                 {/* Video Embed url */}
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Link Feed CCTV / Video</label>
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Link Video Dokumentasi (Google Drive)</label>
                   <input
                     type="text"
+                    placeholder="Contoh: https://drive.google.com/file/d/.../view"
                     value={editVideo}
                     onChange={(e) => setEditVideo(e.target.value)}
                     className={`w-full p-2.5 rounded-xl text-xs outline-none border focus:border-blue-500 font-mono text-[11px]

@@ -447,71 +447,95 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ darkMode }) => {
 
             </div>
 
-            {/* Right Box: LIVE CAMERA SIMULATOR */}
+            {/* Right Box: GOOGLE DRIVE VIDEO DOCUMENTATION */}
             <div className="lg:col-span-4 space-y-5">
               
-              {/* camera box display wrapper */}
+              {/* video box display wrapper */}
               <div className={`p-4 rounded-2xl border overflow-hidden relative space-y-3
                 ${darkMode ? 'bg-slate-900/60 border-slate-800' : 'bg-white border-slate-100 shadow-sm'}`}>
                 
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-black tracking-tight text-red-500 uppercase flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping shrink-0" />
-                    <span>Live Monitoring Feed</span>
+                  <h3 className="text-xs font-black tracking-tight text-blue-600 dark:text-blue-400 uppercase flex items-center gap-1.5">
+                    <Video size={14} className="animate-pulse text-blue-500" />
+                    <span>Video Dokumentasi Qurban</span>
                   </h3>
                   <span className="text-[10px] font-mono font-bold text-slate-400">
-                    CCTV Cam 01
+                    Google Drive
                   </span>
                 </div>
 
-                {/* Video viewport simulator / iframe */}
-                <div className="aspect-video bg-black rounded-xl overflow-hidden relative border border-slate-800 flex flex-col justify-between p-3.5">
-                  
-                  {/* Watermark overlay info */}
-                  <div className="absolute inset-0 bg-blue-500/5 mix-blend-color pointer-events-none" />
+                {searchedRecord.linkVideo ? (() => {
+                  // Helper function to convert sharing URL to Google Drive embed preview url
+                  const getGoogleDriveEmbedUrl = (url: string) => {
+                    if (!url) return '';
+                    if (url.includes('drive.google.com')) {
+                      const matchD = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+                      if (matchD && matchD[1]) {
+                        return `https://drive.google.com/file/d/${matchD[1]}/preview`;
+                      }
+                      const matchId = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+                      if (matchId && matchId[1]) {
+                        return `https://drive.google.com/file/d/${matchId[1]}/preview`;
+                      }
+                    }
+                    return url;
+                  };
 
-                  {/* Top cam overlay banner */}
-                  <div className="flex justify-between items-center w-full z-10 text-[10px] font-mono text-emerald-400 bg-slate-900/70 p-1.5 rounded backdrop-blur-sm">
-                    <span className="flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      REC LIVE
-                    </span>
-                    <span className="truncate max-w-[120px]">{searchedRecord.lokasiSembelih}</span>
+                  const embedSrc = getGoogleDriveEmbedUrl(searchedRecord.linkVideo);
+
+                  return (
+                    <div className="space-y-3">
+                      {/* Video Player Frame */}
+                      <div className="aspect-video bg-black rounded-xl overflow-hidden relative border border-slate-800 dark:border-slate-700 shadow-inner">
+                        {embedSrc ? (
+                          <iframe
+                            src={embedSrc}
+                            className="w-full h-full border-0 absolute inset-0"
+                            allow="autoplay"
+                            allowFullScreen
+                            title="Google Drive Video Player"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                            <Video size={32} className="text-slate-600 animate-pulse mb-2" />
+                            <span className="text-[11px] font-bold text-slate-400">Video Sedang Diproses</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Launch External Link Button */}
+                      <div className="space-y-2">
+                        <p className="text-[10px] text-slate-400 leading-normal text-left">
+                          Tekan tombol di bawah untuk membuka video resolusi penuh serta mengunduh rekaman dari Google Drive.
+                        </p>
+                        <a
+                          href={searchedRecord.linkVideo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] uppercase tracking-wider rounded-xl transition-all shadow-md shadow-blue-500/10 cursor-pointer"
+                        >
+                          <span>Buka Video Google Drive</span>
+                          <ExternalLink size={12} />
+                        </a>
+                      </div>
+                    </div>
+                  );
+                })() : (
+                  <div className="space-y-3">
+                    {/* Placeholder Frame */}
+                    <div className="aspect-video bg-slate-950 rounded-xl overflow-hidden relative border border-slate-800 flex flex-col items-center justify-center p-4 text-center">
+                      <Video size={36} className="text-slate-700 animate-pulse mb-2" />
+                      <span className="text-[11px] font-extrabold text-slate-500">Video Belum Diupload</span>
+                      <span className="text-[9px] font-mono text-slate-600 uppercase tracking-widest mt-1">
+                        Status: {searchedRecord.status.replace(/_/g, ' ')}
+                      </span>
+                    </div>
+                    
+                    <p className="text-[10.5px] text-slate-400 leading-normal text-left">
+                      Dokumentasi rekaman video Google Drive penyembelihan otomatis diunggah oleh panitia setelah hewan qurban Anda tuntas melewati proses penyembelihan dan penimbangan.
+                    </p>
                   </div>
-
-                  {/* Middle representation */}
-                  <div className="flex flex-col items-center justify-center my-4 text-center z-10">
-                    <Video size={36} className="text-white/40 animate-pulse mb-1.5" />
-                    <span className="text-[11px] font-bold text-white/50">{searchedRecord.namaPekurban}</span>
-                    <span className="text-[9px] font-mono text-white/30 truncate uppercase tracking-widest mt-0.5">
-                      {searchedRecord.status}
-                    </span>
-                  </div>
-
-                  {/* Bottom cam coordinates */}
-                  <div className="flex justify-between items-center w-full z-10 text-[9px] font-mono text-white/40 bg-slate-900/40 p-1 rounded">
-                    <span>ARAF_CO_01</span>
-                    <span>{liveTimecode}</span>
-                  </div>
-
-                  {/* Beautiful background scanner effect */}
-                  <div className="absolute top-0 left-0 w-full h-[1.5px] bg-emerald-500/20 shadow shadow-emerald-500/10 animate-scanner pointer-events-none" />
-                </div>
-
-                <div className="space-y-2">
-                  <p className="text-[11px] text-slate-400 leading-normal text-left">
-                    Halaman live stream diaktifkan khusus selama hari tasyrik tuntas. Jika Anda tidak dapat melihat umpan langsung, silakan hubungi Whatsapp Panitia di lokasi.
-                  </p>
-                  <a
-                    href="https://youtube.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-full inline-flex items-center justify-center gap-1 px-3 py-2 border rounded-xl font-bold text-[10px] uppercase text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                  >
-                    <span>Saluran Dokumentasi YouTube</span>
-                    <ExternalLink size={11} />
-                  </a>
-                </div>
+                )}
 
               </div>
 
