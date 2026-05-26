@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 1. Global Safety Net (Default-Deny Catch-All)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Reuseable global security helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+             request.auth.token.email == 'rumahqurbanarofah@gmail.com' && 
+             request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation helper for Pekurban entity
+    function isValidPekurban(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.namaPekurban is string && data.namaPekurban.size() >= 2 && data.namaPekurban.size() <= 256
+        && data.jenisHewan is string && (data.jenisHewan == 'Sapi' || data.jenisHewan == 'Kambing' || data.jenisHewan == 'Domba' || data.jenisHewan == 'Kerbau')
+        && data.status is string && (
+          data.status == 'menunggu' || 
+          data.status == 'diterima' || 
+          data.status == 'antemortem_aman' || 
+          data.status == 'siap_sembelih' || 
+          data.status == 'sedang_sembelih' || 
+          data.status == 'sedang_kulit_potong' || 
+          data.status == 'sedang_kemas' || 
+          data.status == 'siap_distribusi' || 
+          data.status == 'selesai'
+        )
+        && data.nomorTelepon is string && data.nomorTelepon.size() >= 5 && data.nomorTelepon.size() <= 64;
+    }
+
+    // Rules for "pekurban" collection
+    match /pekurban/{id} {
+      // Allow single document get for public to search their slaughter status by Qurban ID
+      allow get: if isValidId(id);
+
+      // Lists only allowed for authenticated admins to avoid PII leak
+      allow list: if isAdmin();
+
+      // Creates must be verified admins
+      allow create: if isAdmin() 
+                    && isValidId(id) 
+                    && isValidPekurban(incoming())
+                    && incoming().createdAt == request.time;
+
+      // Updates must be verified admins & respect schema validation
+      allow update: if isAdmin() 
+                    && isValidPekurban(incoming())
+                    && incoming().id == existing().id
+                    && incoming().createdAt == existing().createdAt
+                    && incoming().updatedAt == request.time;
+
+      // Deletes only allowed for admins
+      allow delete: if isAdmin();
+    }
+  }
+}

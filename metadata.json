@@ -1,0 +1,6 @@
+{
+  "name": "Penyembelihan Rumah Qurban Arafah 2026",
+  "description": "Sistem informasi realtime dan manajemen proses penyembelihan hewan Rumah Qurban Arafah 2026.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

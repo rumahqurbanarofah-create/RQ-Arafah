@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+/* Custom Micro-animation keyframes */
+@keyframes scanner {
+  0% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Custom interactive classes */
+.animate-scanner {
+  animation: scanner 4s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Clear focus borders */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+}
+
+/* Hide standard print headers for qurban certificates */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #customer-portal-view, #customer-portal-view * {
+    visibility: visible;
+  }
+  #customer-portal-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  #main-sidebar, #main-topbar, footer, button, select, input {
+    display: none !important;
+  }
+}

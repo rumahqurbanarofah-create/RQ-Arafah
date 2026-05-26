@@ -1,0 +1,33 @@
+{
+  "entities": {
+    "Pekurban": {
+      "title": "Pekurban",
+      "description": "Informasi konsumen dan hewan qurban untuk penyembelihan di Rumah Qurban Arafah 2026.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "ID unik hewan / qurban (contoh: AQ-2026-0001)." },
+        "namaPekurban": { "type": "string", "description": "Nama orang yang berqurban." },
+        "jenisHewan": { "type": "string", "enum": ["Sapi", "Kambing", "Domba", "Kerbau"], "description": "Jenis hewan qurban." },
+        "tipeHewan": { "type": "string", "description": "Tipe detail hewan, misal Sapi Limousin Jumbo." },
+        "beratHewan": { "type": "number", "description": "Berat badan hewan dalam Kilogram." },
+        "status": { "type": "string", "enum": ["menunggu", "diterima", "antemortem_aman", "siap_sembelih", "sedang_sembelih", "sedang_kulit_potong", "sedang_kemas", "siap_distribusi", "selesai"], "description": "Status alur proses penyembelihan." },
+        "nomorTelepon": { "type": "string", "description": "Nomor WhatsApp atau ponsel konsumen." },
+        "email": { "type": "string", "description": "Email konsumen." },
+        "tanggalPenyembelihan": { "type": "string", "description": "Tanggal pelaksanaan penyembelihan." },
+        "waktuPenyembelihan": { "type": "string", "description": "Perkiraan waktu pelaksanaan, misal 08:30 WIB." },
+        "lokasiSembelih": { "type": "string", "description": "Lokasi pemotongan." },
+        "linkVideo": { "type": "string", "description": "Link video monitoring / dokumentasi penyembelihan." },
+        "catatan": { "type": "string", "description": "Catatan khusus (misal: minta kepala dipisah)." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Waktu pembuatan record." },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Waktu modifikasi terakhir." }
+      },
+      "required": ["id", "namaPekurban", "jenisHewan", "status", "nomorTelepon", "createdAt"]
+    }
+  },
+  "firestore": {
+    "pekurban": {
+      "schema": "Pekurban",
+      "description": "Koleksi utama berisi daftar pekurban dan hewan qurban beserta posisi status penyembelihan saat ini."
+    }
+  }
+}
