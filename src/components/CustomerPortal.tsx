@@ -31,8 +31,6 @@ interface CustomerPortalProps {
 
 const STEPS: { status: StatusPenyembelihan; label: string; desc: string }[] = [
   { status: 'menunggu', label: 'Menunggu', desc: 'Registrasi & hewan belum tiba di lokasi RQA' },
-  { status: 'diterima', label: 'Diterima', desc: 'Hewan tiba di penampungan, ditimbang secara sukses' },
-  { status: 'antemortem_aman', label: 'Uji Antemortem', desc: 'Pemeriksaan kesehatan dokter hewan & aman PMK' },
   { status: 'siap_sembelih', label: 'Siap Sembelih', desc: 'Hewan digiring ke ring bilik penyembelihan RQA' },
   { status: 'sedang_sembelih', label: 'Penyembelihan', desc: 'Pemotongan syar’i diiringi lafadz takbir' },
   { status: 'sedang_kulit_potong', label: 'Kulit & Potong', desc: 'Proses pengulitan karkas, pemisahan daging & tulang' },
@@ -398,7 +396,7 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ darkMode }) => {
                   Alur Proses Penyembelihan
                 </h3>
                 <span className={`text-[11px] font-semibold text-slate-400`}>
-                  9 Tahap Transparansi Syariat
+                  7 Tahap Transparansi Syariat
                 </span>
               </div>
 

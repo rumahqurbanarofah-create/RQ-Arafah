@@ -66,8 +66,6 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ darkMode }) => {
   // 3. Chart 2: Bar Chart of Progression Stages
   const stagesList = [
     { label: 'Menunggu', key: 'menunggu' },
-    { label: 'Diterima', key: 'diterima' },
-    { label: 'Antemortem', key: 'antemortem_aman' },
     { label: 'Siap Sembelih', key: 'siap_sembelih' },
     { label: 'Sedang Sembelih', key: 'sedang_sembelih' },
     { label: 'Kulit & Potong', key: 'sedang_kulit_potong' },
@@ -215,7 +213,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ darkMode }) => {
                 />
                 <Bar dataKey="Jumlah Hewan" fill="#2563EB" radius={[4, 4, 0, 0]}>
                   {stageChartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={index === 4 || index === 8 ? '#10B981' : '#2563EB'} />
+                    <Cell key={`cell-${index}`} fill={index === 2 || index === 6 ? '#10B981' : '#2563EB'} />
                   ))}
                 </Bar>
               </BarChart>

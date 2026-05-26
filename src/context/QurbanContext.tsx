@@ -67,11 +67,9 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     updatedAt: new Date(Date.now() - 3600000 * 23).toISOString(),
     logs: [
       { id: '1', status: 'menunggu', keterangan: 'Hewan terdaftar di sistem', timestamp: '2026-05-26T07:00:00Z', operator: 'Fathur' },
-      { id: '2', status: 'diterima', keterangan: 'Hewan tiba di Rumah Qurban Arafah dalam kondisi sehat', timestamp: '2026-05-26T08:30:00Z', operator: 'Syarif' },
-      { id: '3', status: 'antemortem_aman', keterangan: 'Pemeriksaan dokter hewan menyatakan hewan fit & bebas PMK', timestamp: '2026-05-26T09:15:00Z', operator: 'Drh. Rizal' },
       { id: '4', status: 'siap_sembelih', keterangan: 'Hewan digiring ke ruang steril penyembelihan', timestamp: '2026-05-27T07:15:00Z', operator: 'Gunawan' },
       { id: '5', status: 'sedang_sembelih', keterangan: 'Penyembelihan dipimpin oleh Ustadz Syaiful dengan lafadz takbir syari', timestamp: '2026-05-27T07:32:00Z', operator: 'Ustadz Syaiful' },
-      { id: '6', status: 'sedang_kulit_potong', keterangan: 'Pengulitan dan pemisahan karkas menjadi bagian kecil', timestamp: '2026-05-27T07:45:00Z', operator: 'Tim Jagal A' },
+      { id: '6', status: 'sedang_kulit_potong', keterangan: 'Pengulitan dan pemisahan karkas menjadi bagian kecil', timestamp: '2026-05-27T07:45:00Z', operator: 'Tim Jagal B' },
       { id: '7', status: 'sedang_kemas', keterangan: 'Selesai ditimbang higenis, pengemasan menggunakan box ramah lingkungan', timestamp: '2026-05-27T08:10:00Z', operator: 'Tim Kemas' },
       { id: '8', status: 'siap_distribusi', keterangan: 'Daging qurban dalam cold storage siap diambil atau didistribusi', timestamp: '2026-05-27T08:30:00Z', operator: 'Logistik RQA' },
       { id: '9', status: 'selesai', keterangan: 'Seluruh paket qurban telah diserahkan sepenuhnya. Semoga berkah.', timestamp: '2026-05-27T09:00:00Z', operator: 'Logistik RQA' },
@@ -95,8 +93,6 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     updatedAt: new Date(Date.now() - 3600000 * 2).toISOString(),
     logs: [
       { id: '1', status: 'menunggu', keterangan: 'Kambing terdaftar dalam program mandiri', timestamp: '2026-05-26T10:00:00Z', operator: 'Fathur' },
-      { id: '2', status: 'diterima', keterangan: 'Kambing diterima di kandang transit RQA', timestamp: '2026-05-26T11:30:00Z', operator: 'Syarif' },
-      { id: '3', status: 'antemortem_aman', keterangan: 'Hasil scan kesehatan antemortem: Sehat, giat, cukup umur', timestamp: '2026-05-26T12:00:00Z', operator: 'Drh. Rizal' },
       { id: '4', status: 'siap_sembelih', keterangan: 'Hewan dipindahkan ke ring bilik penyembelihan', timestamp: '2026-05-27T08:35:00Z', operator: 'Gunawan' }
     ]
   },
@@ -118,8 +114,6 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     updatedAt: new Date(Date.now() - 3600000 * 1).toISOString(),
     logs: [
       { id: '1', status: 'menunggu', keterangan: 'Sapi diproses administrasi', timestamp: '2026-05-26T11:00:00Z', operator: 'Fathur' },
-      { id: '2', status: 'diterima', keterangan: 'Sapi tiba dengan berat timbang 410kg', timestamp: '2026-05-26T13:00:00Z', operator: 'Syarif' },
-      { id: '3', status: 'antemortem_aman', keterangan: 'Rekomendasi dokter hewan: Layak qurban, gigi kupas', timestamp: '2026-05-26T14:15:00Z', operator: 'Drh. Rizal' },
       { id: '4', status: 'siap_sembelih', keterangan: 'Sapi diposisikan di Restraining Box anti-stres', timestamp: '2026-05-27T08:50:00Z', operator: 'Gunawan' },
       { id: '5', status: 'sedang_sembelih', keterangan: 'Proses pemotongan urat nadi utama sedang berjalan didampingi saksi', timestamp: '2026-05-27T09:02:00Z', operator: 'Ustadz Junaidi' }
     ]
@@ -142,8 +136,6 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     updatedAt: new Date(Date.now() - 600000).toISOString(),
     logs: [
       { id: '1', status: 'menunggu', keterangan: 'Domba Garut didaftarkan via online', timestamp: '2026-05-26T12:00:00Z', operator: 'Online Admin' },
-      { id: '2', status: 'diterima', keterangan: 'Domba diturunkan di pos penampungan', timestamp: '2026-05-26T14:30:00Z', operator: 'Syarif' },
-      { id: '3', status: 'antemortem_aman', keterangan: 'Lulus uji kesehatan klinis', timestamp: '2026-05-26T15:30:00Z', operator: 'Drh. Rizal' },
       { id: '4', status: 'siap_sembelih', keterangan: 'Domba dipindahkan ke zona sembelih kayu jati', timestamp: '2026-05-27T09:10:00Z', operator: 'Gunawan' },
       { id: '5', status: 'sedang_sembelih', keterangan: 'Penyembelihan syar’i selesai dikerjakan', timestamp: '2026-05-27T09:18:00Z', operator: 'Ustadz Syaiful' },
       { id: '6', status: 'sedang_kulit_potong', keterangan: 'Pemisahan bagian karkas utama dan pemisahan jeroan', timestamp: '2026-05-27T09:30:00Z', operator: 'Tim Jagal B' }
@@ -167,8 +159,6 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     updatedAt: new Date(Date.now() - 300000).toISOString(),
     logs: [
       { id: '1', status: 'menunggu', keterangan: 'Sapi Bali 7 Jiwa didaftarkan', timestamp: '2026-05-26T14:00:00Z', operator: 'Fathur' },
-      { id: '2', status: 'diterima', keterangan: 'Sapi tiba di penampungan', timestamp: '2026-05-26T16:00:00Z', operator: 'Syarif' },
-      { id: '3', status: 'antemortem_aman', keterangan: 'Uji dokter: Sapi lincah, suhu tubuh normal 38C', timestamp: '2026-05-26T16:45:00Z', operator: 'Drh. Rizal' },
       { id: '4', status: 'siap_sembelih', keterangan: 'Dipindahkan ke area gantry utama', timestamp: '2026-05-27T09:20:00Z', operator: 'Gunawan' },
       { id: '5', status: 'sedang_sembelih', keterangan: 'Sudah disembelih dengan pemotongan esofagus-trakea-karotis sempurna', timestamp: '2026-05-27T09:31:00Z', operator: 'Ustadz Junaidi' },
       { id: '6', status: 'sedang_kulit_potong', keterangan: 'Proses pembersihan karkas dan pencucian jeroan hijau', timestamp: '2026-05-27T09:50:00Z', operator: 'Tim Jagal A' },
@@ -181,7 +171,7 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     jenisHewan: 'Kambing',
     tipeHewan: 'Kambing Jawa Kacang',
     beratHewan: 33,
-    status: 'diterima',
+    status: 'menunggu',
     nomorTelepon: '081299887766',
     email: 'rezap@gmail.com',
     tanggalPenyembelihan: '2026-05-28',
@@ -193,7 +183,6 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     updatedAt: new Date(Date.now() - 3600000 * 7).toISOString(),
     logs: [
       { id: '1', status: 'menunggu', keterangan: 'Kambing Jawa didaftarkan online', timestamp: '2026-05-26T18:00:00Z', operator: 'Online Admin' },
-      { id: '2', status: 'diterima', keterangan: 'Kambing diterima dan ditempatkan di kandang istirahat RQA', timestamp: '2026-05-26T19:30:00Z', operator: 'Syarif' },
     ]
   },
   {
@@ -202,7 +191,7 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     jenisHewan: 'Kerbau',
     tipeHewan: 'Kerbau Toraja Gemuk',
     beratHewan: 520,
-    status: 'antemortem_aman',
+    status: 'siap_sembelih',
     nomorTelepon: '085244556677',
     email: 'gozali.ahmad@gmail.com',
     tanggalPenyembelihan: '2026-05-27',
@@ -214,8 +203,7 @@ const INITIAL_DUMMY_DATA: Pekurban[] = [
     updatedAt: new Date(Date.now() - 3600000 * 12).toISOString(),
     logs: [
       { id: '1', status: 'menunggu', keterangan: 'Kerbau terdaftar di pos administrasi', timestamp: '2026-05-26T06:30:00Z', operator: 'Fathur' },
-      { id: '2', status: 'diterima', keterangan: 'Kerbau tiba menggunakan truk logistik RQA', timestamp: '2026-05-26T10:00:00Z', operator: 'Syarif' },
-      { id: '3', status: 'antemortem_aman', keterangan: 'Pemeriksaan antemortem: Sehat fisik, aktif, bebas penyakit mulut', timestamp: '2026-05-26T11:00:00Z', operator: 'Drh. Rizal' }
+      { id: '4', status: 'siap_sembelih', keterangan: 'Kerbau tiba di Rumah Qurban Arafah dan diposisikan siap sembelih', timestamp: '2026-05-26T10:00:00Z', operator: 'Syarif' },
     ]
   },
   {
@@ -374,8 +362,6 @@ export const QurbanProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       const getAlurKeterangan = (status: StatusPenyembelihan) => {
         switch (status) {
           case 'menunggu': return 'Menunggu hewan dikirim oleh penyedia ke kandang transit.';
-          case 'diterima': return 'Hewan dinyatakan tiba dengan selamat di Rumah Qurban Arafah.';
-          case 'antemortem_aman': return 'Pemeriksaan kesehatan antemortem lulus: hewan prima, bersih dari parasit, lincah.';
           case 'siap_sembelih': return 'Hewan qurban dipindahkan ke bilik persiapan sembelih utama.';
           case 'sedang_sembelih': return 'Proses penyembelihan syariat oleh Tim Juru Sembelih RQA.';
           case 'sedang_kulit_potong': return 'Pengulitan tuntas, karkas diturunkan dan dibagi menjadi log-log daging & tulang.';

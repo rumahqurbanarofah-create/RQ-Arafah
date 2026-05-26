@@ -7,8 +7,6 @@ export type JenisHewan = 'Sapi' | 'Kambing' | 'Domba' | 'Kerbau';
 
 export type StatusPenyembelihan =
   | 'menunggu'          // Menunggu Hewan Tiba
-  | 'diterima'          // Hewan Telah Diterima RQA
-  | 'antemortem_aman'   // Pemeriksaan Antemortem & Sehat
   | 'siap_sembelih'     // Masuk Area Pemotongan
   | 'sedang_sembelih'   // Proses Penyembelihan (Sesuai Syariat)
   | 'sedang_kulit_potong' // Proses Pengulitan & Pemotongan Daging

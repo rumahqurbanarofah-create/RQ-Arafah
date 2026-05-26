@@ -250,10 +250,6 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
     switch (status) {
       case 'menunggu':
         return 'bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700';
-      case 'diterima':
-        return 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/40 dark:text-blue-300 dark:border-blue-800';
-      case 'antemortem_aman':
-        return 'bg-indigo-50 text-indigo-700 border-indigo-200 dark:bg-indigo-900/40 dark:text-indigo-300 dark:border-indigo-800';
       case 'siap_sembelih':
         return 'bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyan-900/40 dark:text-cyan-300 dark:border-cyan-800';
       case 'sedang_sembelih':
@@ -344,8 +340,6 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
               >
                 <option value="all">Semua Status (Lengkap)</option>
                 <option value="menunggu">Menunggu</option>
-                <option value="diterima">Diterima</option>
-                <option value="antemortem_aman">Antemortem</option>
                 <option value="siap_sembelih">Siap Sembelih</option>
                 <option value="sedang_sembelih">Sedang Sembelih</option>
                 <option value="sedang_kulit_potong">Kulit & Potong</option>
@@ -672,8 +666,7 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
                       ${darkMode ? 'bg-slate-950 border-slate-850' : 'bg-slate-50 border-slate-200'}`}
                   >
                     <option value="menunggu">Menunggu</option>
-                    <option value="diterima">Diterima</option>
-                    <option value="antemortem_aman">Antemortem</option>
+                    <option value="siap_sembelih">Siap Sembelih</option>
                   </select>
                 </div>
 
@@ -798,14 +791,12 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
                   {[
                     { val: 'menunggu', label: '1. Menunggu' },
-                    { val: 'diterima', label: '2. Diterima RQA' },
-                    { val: 'antemortem_aman', label: '3. Antemortem Sehat' },
-                    { val: 'siap_sembelih', label: '4. Siap Sembelih' },
-                    { val: 'sedang_sembelih', label: '5. Sembelih (Takbir)' },
-                    { val: 'sedang_kulit_potong', label: '6. Sedang Kulit' },
-                    { val: 'sedang_kemas', label: '7. Timbang/Packing' },
-                    { val: 'siap_distribusi', label: '8. Siap Distribusi' },
-                    { val: 'selesai', label: '9. Selesai Penyerahan' },
+                    { val: 'siap_sembelih', label: '2. Siap Sembelih' },
+                    { val: 'sedang_sembelih', label: '3. Sembelih (Takbir)' },
+                    { val: 'sedang_kulit_potong', label: '4. Sedang Kulit' },
+                    { val: 'sedang_kemas', label: '5. Timbang/Packing' },
+                    { val: 'siap_distribusi', label: '6. Siap Distribusi' },
+                    { val: 'selesai', label: '7. Selesai Penyerahan' },
                   ].map(step => (
                     <button
                       key={step.val}
