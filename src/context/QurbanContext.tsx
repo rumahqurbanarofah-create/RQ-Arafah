@@ -250,20 +250,7 @@ export const QurbanProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         // Urutkan berdasarkan ID
         items.sort((a, b) => b.id.localeCompare(a.id));
 
-        if (items.length === 0) {
-          // Inisialisasi Firebase DB dengan dummy data jika kosong
-          console.log("Firebase kosong, mem-boot dummy data awal...");
-          INITIAL_DUMMY_DATA.forEach(async (dummy) => {
-            try {
-              await setDoc(doc(db, 'pekurban', dummy.id), dummy);
-            } catch (err) {
-              console.error("Gagal write dummy ke Firebase:", err);
-            }
-          });
-          setPekurbans(INITIAL_DUMMY_DATA);
-        } else {
-          setPekurbans(items);
-        }
+        setPekurbans(items);
         setLoading(false);
       }, (error) => {
         setFirebaseError(error.message);
