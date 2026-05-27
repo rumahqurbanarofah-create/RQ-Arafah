@@ -20,14 +20,18 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, darkMod
 
   if (!isOpen) return null;
 
-  const handleSubmitPin = (e: React.FormEvent) => {
+  const handleSubmitPin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
-    const success = loginLocalDemo(pin);
-    if (success) {
-      onClose();
-    } else {
-      setErrorMsg('PIN yang Anda masukkan salah.');
+    try {
+      const success = await loginLocalDemo(pin);
+      if (success) {
+        onClose();
+      } else {
+        setErrorMsg('PIN yang Anda masukkan salah.');
+      }
+    } catch (err: any) {
+      setErrorMsg('Gagal Login: ' + err.message);
     }
   };
 

@@ -39,6 +39,7 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
     createPekurban, 
     updatePekurban, 
     deletePekurban, 
+    clearAllPekurbans,
     loading 
   } = useQurban();
 
@@ -88,6 +89,22 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
   const [editLokasi, setEditLokasi] = useState('');
   const [editVideo, setEditVideo] = useState('');
   const [editCatatan, setEditCatatan] = useState('');
+
+  const handleClearDatabase = async () => {
+    const confirm1 = confirm("Apakah Anda yakin ingin MENGOSONGKAN seluruh database? Semua data pekurban akan dihapus selamanya!");
+    if (!confirm1) return;
+    
+    const confirm2 = confirm("Beneran yakin? Tindakan ini menghapus semua data secara permanen dan tidak bisa dikembalikan!");
+    if (!confirm2) return;
+    
+    try {
+      await clearAllPekurbans();
+      alert("Database berhasil dikosongkan!");
+      setCurrentPage(1);
+    } catch (err: any) {
+      alert("Gagal mengosongkan database: " + err.message);
+    }
+  };
 
   // -------------------------------------------------------------
   // FILTERING AND SORTING LOGIC
@@ -282,13 +299,24 @@ export const ManajemenView: React.FC<ManajemenViewProps> = ({ darkMode }) => {
             Tambah pekurban baru, modifikasi profil hewan, atau koordinasikan status sembelih realtime ke portal publik.
           </p>
         </div>
-        <button
-          onClick={handleOpenCreate}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md shadow-blue-500/10 flex items-center justify-center gap-1.5 cursor-pointer max-w-fit"
-        >
-          <Plus size={16} />
-          <span>Tambah Pekurban</span>
-        </button>
+        <div className="flex flex-wrap gap-2">
+          {pekurbans.length > 0 && (
+            <button
+              onClick={handleClearDatabase}
+              className="border border-rose-500 hover:bg-rose-500/10 text-rose-550 dark:text-rose-450 hover:bg-rose-500 hover:text-white dark:hover:text-white font-bold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <Trash2 size={16} />
+              <span>Kosongkan Database</span>
+            </button>
+          )}
+          <button
+            onClick={handleOpenCreate}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md shadow-blue-500/10 flex items-center justify-center gap-1.5 cursor-pointer"
+          >
+            <Plus size={16} />
+            <span>Tambah Pekurban</span>
+          </button>
+        </div>
       </div>
 
       {/* FILTER, SEARCH & SORT BAR */}

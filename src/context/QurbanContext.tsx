@@ -24,6 +24,7 @@ import {
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
+  signInAnonymously,
   User
 } from 'firebase/auth';
 
@@ -39,9 +40,10 @@ interface QurbanContextProps {
   createPekurban: (data: Omit<Pekurban, 'logs' | 'createdAt' | 'updatedAt'>) => Promise<void>;
   updatePekurban: (id: string, updates: Partial<Pekurban>, logKeterangan?: string) => Promise<void>;
   deletePekurban: (id: string) => Promise<void>;
+  clearAllPekurbans: () => Promise<void>;
   getSinglePekurban: (id: string) => Promise<Pekurban | null>;
   loginGoogle: () => Promise<void>;
-  loginLocalDemo: (pin: string) => boolean;
+  loginLocalDemo: (pin: string) => Promise<boolean>;
   logout: () => Promise<void>;
 }
 
@@ -414,6 +416,24 @@ export const QurbanProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
+  const clearAllPekurbans = async () => {
+    if (isFirebaseEnabled && db) {
+      try {
+        const qRef = collection(db, 'pekurban');
+        const snapshot = await getDocs(qRef);
+        const promises: Promise<void>[] = [];
+        snapshot.forEach((docSnap) => {
+          promises.push(deleteDoc(docSnap.ref));
+        });
+        await Promise.all(promises);
+      } catch (error) {
+        handleFirestoreError(error, OperationType.DELETE, `pekurban_all`);
+      }
+    } else {
+      syncLocalStorage([]);
+    }
+  };
+
   // 4. Get Single Qurban (for konsumen tracking)
   const getSinglePekurban = async (id: string): Promise<Pekurban | null> => {
     if (isFirebaseEnabled && db) {
@@ -456,12 +476,21 @@ export const QurbanProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   };
 
   // 6. Local Demo / PIN Authentication (MANDATORY fallback)
-  const loginLocalDemo = (pin: string): boolean => {
+  const loginLocalDemo = async (pin: string): Promise<boolean> => {
     if (pin === '2026' || pin.toLowerCase() === 'arafah2026') {
       const mockUserDetails = {
         email: 'rumahqurbanarofah@gmail.com',
         displayName: 'Administrasi RQA 2026'
       };
+      
+      if (isFirebaseEnabled && auth) {
+        try {
+          await signInAnonymously(auth);
+        } catch (err) {
+          console.error("Gagal signInAnonymously:", err);
+        }
+      }
+
       setLocalAdminUser(mockUserDetails);
       localStorage.setItem('arafah_admin_user', JSON.stringify(mockUserDetails));
       return true;
@@ -491,6 +520,7 @@ export const QurbanProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         createPekurban,
         updatePekurban,
         deletePekurban,
+        clearAllPekurbans,
         getSinglePekurban,
         loginGoogle,
         loginLocalDemo,
