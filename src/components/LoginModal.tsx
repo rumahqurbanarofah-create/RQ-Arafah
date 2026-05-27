@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { X, Lock, KeyRound, Sparkles, ShieldCheck, Mail } from 'lucide-react';
+import { X, Lock, ShieldCheck } from 'lucide-react';
 import { useQurban } from '../context/QurbanContext';
 
 interface LoginModalProps {
@@ -14,10 +14,9 @@ interface LoginModalProps {
 }
 
 export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, darkMode }) => {
-  const { loginLocalDemo, loginGoogle, isFirebaseActive } = useQurban();
+  const { loginLocalDemo } = useQurban();
   const [pin, setPin] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
 
@@ -29,19 +28,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, darkMod
       onClose();
     } else {
       setErrorMsg('PIN yang Anda masukkan salah.');
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setErrorMsg('');
-    setLoading(true);
-    try {
-      await loginGoogle();
-      onClose();
-    } catch (err: any) {
-      setErrorMsg('Gagal melakukan login Google: ' + err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -114,37 +100,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, darkMod
             </button>
           </form>
 
-          {/* Separator */}
-          <div className="flex items-center gap-3 text-xs text-slate-400 my-4">
-            <span className="h-[1px] bg-slate-200 dark:bg-slate-800 flex-1"></span>
-            <span>ATAU LOGIN ADMIN AUTH</span>
-            <span className="h-[1px] bg-slate-200 dark:bg-slate-800 flex-1"></span>
-          </div>
 
-          {/* Social Sign In (Google) */}
-          <button
-            onClick={handleGoogleLogin}
-            disabled={loading}
-            className={`w-full flex items-center justify-center gap-3 font-bold py-3 px-4 rounded-xl text-xs tracking-wider uppercase border transition-all cursor-pointer
-              ${darkMode 
-                ? 'bg-slate-950 border-slate-800 text-slate-300 hover:bg-slate-800 hover:text-white' 
-                : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-800'}`}
-          >
-            <Mail size={16} className="text-red-500 shrink-0" />
-            <span>
-              {isFirebaseActive ? 'Masuk dengan Google' : 'Simulasi Google SSO (Demo)'}
-            </span>
-          </button>
-
-          {/* Helpful helper badge */}
-          <div className={`p-4 rounded-xl text-[11px] leading-relaxed text-left
-            ${darkMode ? 'bg-slate-950/40 text-slate-400' : 'bg-blue-50/50 text-blue-600'}`}>
-            <p className="font-bold mb-1 flex items-center gap-1">
-              <Sparkles size={11} />
-              <span>Info Kode Demo:</span>
-            </p>
-            Gunakan PIN <strong className="font-bold underline text-blue-500">2026</strong> atau kata sandi <strong className="font-bold underline text-blue-500">arafah2026</strong> jika Anda sedang meriview fungsionalitas CRUD secara luring tanpa cloud Firestore.
-          </div>
         </div>
       </div>
     </div>
