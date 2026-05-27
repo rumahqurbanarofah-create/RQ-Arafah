@@ -38,6 +38,8 @@ export const Topbar: React.FC<TopbarProps> = ({
   const { localAdminUser, currentUser, isFirebaseActive, firebaseError } = useQurban();
   const isAdminLoggedIn = !!localAdminUser || !!currentUser;
 
+  const [showCloudErrorDetail, setShowCloudErrorDetail] = useState(false);
+
   // Real-time Clock in West Indonesian Time (WIB)
   const [timeStr, setTimeStr] = useState('');
   const [dateStr, setDateStr] = useState('');
@@ -117,13 +119,14 @@ export const Topbar: React.FC<TopbarProps> = ({
         {/* Real-time Indicator Widget */}
         {isFirebaseActive ? (
           firebaseError ? (
-            <div 
-              className="flex items-center gap-1.5 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold bg-red-500/10 text-red-600 border border-red-500/20 max-w-[120px] md:max-w-none truncate" 
-              title={`Firestore Error: ${firebaseError}\nKembali ke Mode Lokal (Offline)`}
+            <button 
+              onClick={() => setShowCloudErrorDetail(true)}
+              className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-sm font-semibold bg-red-500/10 text-red-600 border border-red-500/20 max-w-[120px] md:max-w-none truncate hover:bg-red-500/20 transition-all cursor-pointer animate-pulse" 
+              title="Klik untuk melihat detail error koneksi cloud"
             >
               <AlertCircle size={13} className="shrink-0 text-red-500" />
               <span className="truncate">Error Cloud</span>
-            </div>
+            </button>
           ) : (
             <div className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
@@ -166,6 +169,55 @@ export const Topbar: React.FC<TopbarProps> = ({
           </div>
         )}
       </div>
+
+      {/* Cloud Error Detail Modal */}
+      {showCloudErrorDetail && (
+        <div id="cloud-error-modal" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className={`w-full max-w-md p-6 rounded-2xl shadow-xl border transition-all duration-200 text-left
+            ${darkMode ? 'bg-slate-900 border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-800'}`}>
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-sm font-bold tracking-tight text-red-600 dark:text-red-400 flex items-center gap-2">
+                <AlertCircle size={18} />
+                Detail Error Firebase Cloud
+              </h3>
+              <button 
+                onClick={() => setShowCloudErrorDetail(false)}
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            
+            <div className={`p-4 rounded-xl font-mono text-xs overflow-auto max-h-48 mb-4 border select-all
+              ${darkMode ? 'bg-slate-950 border-slate-800 text-red-400' : 'bg-red-50/50 border-red-100 text-red-700'}`}>
+              {firebaseError}
+            </div>
+
+            <p className="text-xs leading-relaxed text-slate-500 dark:text-slate-400 mb-4">
+              Aplikasi telah dialihkan secara otomatis ke <strong>Mode Lokal (Offline)</strong> menggunakan <em>LocalStorage</em> agar fungsionalitas CRUD tetap berjalan lancar tanpa terganggu.
+            </p>
+
+            <div className="text-xs space-y-2 text-slate-400 dark:text-slate-500 border-t border-slate-105 dark:border-slate-800 pt-3">
+              <p className="font-semibold text-slate-600 dark:text-slate-300">💡 Langkah Mengatasi:</p>
+              <ul className="list-disc pl-4 space-y-1">
+                <li>Pastikan <strong>Cloud Firestore</strong> telah diaktifkan di panel Firebase Console pada project <code className="font-mono text-[10px] bg-slate-100 dark:bg-slate-950 px-1 py-0.5 rounded">rumah-qurban-arafah-f60d7</code>.</li>
+                <li>Jika baru membuat database, pastikan memilih opsi <strong>"Start in Test Mode"</strong> agar hak akses baca dan tulis dapat diakses publik, atau deploy Security Rules dari AI Studio.</li>
+                <li>Periksa koneksi internet ponsel Anda.</li>
+              </ul>
+            </div>
+
+            <button
+              onClick={() => {
+                setShowCloudErrorDetail(false);
+                window.location.reload();
+              }}
+              className="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer"
+            >
+              Coba Hubungkan Ulang (Muat Ulang)
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

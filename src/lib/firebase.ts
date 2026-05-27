@@ -22,7 +22,13 @@ let auth: any = null;
 if (isFirebaseEnabled) {
   try {
     const app = initializeApp(firebaseConfig);
-    db = getFirestore(app, firebaseConfig.firestoreDatabaseId || '(default)');
+    const config = firebaseConfig as any;
+    const dbId = config.firestoreDatabaseId;
+    if (dbId && dbId !== '(default)') {
+      db = getFirestore(app, dbId);
+    } else {
+      db = getFirestore(app);
+    }
     auth = getAuth(app);
     console.log("Firebase Firestore & Auth diaktifkan secara sukses.");
   } catch (error) {
