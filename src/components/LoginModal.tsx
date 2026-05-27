@@ -28,7 +28,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, darkMod
     if (success) {
       onClose();
     } else {
-      setErrorMsg('PIN yang Anda masukkan salah. Gunakan PIN demo "2026"');
+      setErrorMsg('PIN yang Anda masukkan salah.');
     }
   };
 
