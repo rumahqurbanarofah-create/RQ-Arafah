@@ -35,7 +35,7 @@ export const Topbar: React.FC<TopbarProps> = ({
   setDarkMode,
   onOpenLoginModal
 }) => {
-  const { localAdminUser, currentUser, isFirebaseActive } = useQurban();
+  const { localAdminUser, currentUser, isFirebaseActive, firebaseError } = useQurban();
   const isAdminLoggedIn = !!localAdminUser || !!currentUser;
 
   // Real-time Clock in West Indonesian Time (WIB)
@@ -115,11 +115,27 @@ export const Topbar: React.FC<TopbarProps> = ({
 
       <div className="flex items-center gap-3">
         {/* Real-time Indicator Widget */}
-        <div className={`hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-medium
-          ${darkMode ? 'bg-slate-800/80 text-slate-300' : 'bg-slate-100 text-slate-600'}`}>
-          <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-          <span>Sistem Pemantauan Aktif</span>
-        </div>
+        {isFirebaseActive ? (
+          firebaseError ? (
+            <div 
+              className="flex items-center gap-1.5 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold bg-red-500/10 text-red-600 border border-red-500/20 max-w-[120px] md:max-w-none truncate" 
+              title={`Firestore Error: ${firebaseError}\nKembali ke Mode Lokal (Offline)`}
+            >
+              <AlertCircle size={13} className="shrink-0 text-red-500" />
+              <span className="truncate">Error Cloud</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span>Cloud Aktif</span>
+            </div>
+          )
+        ) : (
+          <div className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-semibold bg-amber-500/10 text-amber-600 border border-amber-500/20">
+            <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+            <span>Mode Lokal</span>
+          </div>
+        )}
 
         {/* Theme Switcher Toggle */}
         <button

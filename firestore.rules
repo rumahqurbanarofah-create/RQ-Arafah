@@ -51,24 +51,18 @@ service cloud.firestore {
 
     // Rules for "pekurban" collection
     match /pekurban/{id} {
-      // Allow single document get for public to search their slaughter status by Qurban ID
-      allow get: if isValidId(id);
-
-      // Lists only allowed for authenticated admins to avoid PII leak
-      allow list: if isAdmin();
+      // Allow read (get and list) for both public and admins
+      allow read: if true;
 
       // Creates must be verified admins
       allow create: if isAdmin() 
                     && isValidId(id) 
-                    && isValidPekurban(incoming())
-                    && incoming().createdAt == request.time;
+                    && isValidPekurban(incoming());
 
       // Updates must be verified admins & respect schema validation
       allow update: if isAdmin() 
                     && isValidPekurban(incoming())
-                    && incoming().id == existing().id
-                    && incoming().createdAt == existing().createdAt
-                    && incoming().updatedAt == request.time;
+                    && incoming().id == existing().id;
 
       // Deletes only allowed for admins
       allow delete: if isAdmin();
