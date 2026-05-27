@@ -1,10 +1,9 @@
 {
-  "apiKey": "AIzaSyACiCSYwpB78VVIGjS_z0rqPp4ta6gzw9A",
-  "authDomain": "rumah-qurban-arafah-f60d7.firebaseapp.com",
-  "projectId": "rumah-qurban-arafah-f60d7",
-  "storageBucket": "rumah-qurban-arafah-f60d7.firebasestorage.app",
-  "messagingSenderId": "656238917065",
-  "appId": "1:656238917065:web:15432c8e4f04a3e86c2418",
-  "measurementId": "G-HRE1BSSC9M",
+  "apiKey": "AIzaSyBQdDfmnpTnoQBKYVqcOdA10QNSdna8RgY",
+  "authDomain": "rqapenyembelihan.firebaseapp.com",
+  "projectId": "rqapenyembelihan",
+  "storageBucket": "rqapenyembelihan.firebasestorage.app",
+  "messagingSenderId": "475161994384",
+  "appId": "1:475161994384:web:73608820bf1eb97482a415",
   "firestoreDatabaseId": "(default)"
 }
