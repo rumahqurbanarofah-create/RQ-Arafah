@@ -1,9 +1,10 @@
 {
-  "apiKey": "placeholder-api-key",
-  "authDomain": "placeholder-auth-domain",
-  "projectId": "placeholder-project-id",
-  "storageBucket": "placeholder-storage-bucket",
-  "messagingSenderId": "placeholder-sender-id",
-  "appId": "placeholder-app-id",
+  "apiKey": "AIzaSyACiCSYwpB78VVIGjS_z0rqPp4ta6gzw9A",
+  "authDomain": "rumah-qurban-arafah-f60d7.firebaseapp.com",
+  "projectId": "rumah-qurban-arafah-f60d7",
+  "storageBucket": "rumah-qurban-arafah-f60d7.firebasestorage.app",
+  "messagingSenderId": "656238917065",
+  "appId": "1:656238917065:web:15432c8e4f04a3e86c2418",
+  "measurementId": "G-HRE1BSSC9M",
   "firestoreDatabaseId": "(default)"
 }

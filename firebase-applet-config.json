@@ -5,5 +5,6 @@
   "storageBucket": "rumah-qurban-arafah-f60d7.firebasestorage.app",
   "messagingSenderId": "656238917065",
   "appId": "1:656238917065:web:15432c8e4f04a3e86c2418",
-  "measurementId": "G-HRE1BSSC9M"
+  "measurementId": "G-HRE1BSSC9M",
+  "firestoreDatabaseId": "(default)"
 }
